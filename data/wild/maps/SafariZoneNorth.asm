@@ -1,5 +1,5 @@
 SafariZoneNorthWildMons:
-	def_grass_wildmons 30 ; encounter rate
+	def_grass_wildmons 255 ; encounter rate
 	db 36, NIDORAN_M
 	db 14, NIDORAN_F
 	db 20, EXEGGCUTE

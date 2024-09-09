@@ -255,6 +255,10 @@ INCLUDE "text/SaffronCity.asm"
 
 INCLUDE "data/text/text_9.asm"
 
+SECTION "Text 9", ROMX
+
+INCLUDE "text/move_deleter.asm"
+INCLUDE "text/move_relearner.asm"
 
 SECTION "Pokédex Text", ROMX
 
@@ -264,3 +268,7 @@ INCLUDE "data/pokemon/dex_text.asm"
 SECTION "Move Names", ROMX
 
 INCLUDE "data/moves/names.asm"
+
+SECTION "Item Descriptions", ROMX
+
+INCLUDE "data/text/item_descriptions.asm"

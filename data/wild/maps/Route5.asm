@@ -1,5 +1,5 @@
 Route5WildMons:
-	def_grass_wildmons 15 ; encounter rate
+	def_grass_wildmons 255 ; encounter rate
 	db 15, PIDGEY
 	db 14, RATTATA
 	db  7, ABRA

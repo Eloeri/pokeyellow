@@ -1096,6 +1096,7 @@ PikachuEvosMoves:
 	db 8, THUNDER_WAVE
 	db 11, QUICK_ATTACK
 	db 15, DOUBLE_TEAM
+	db 18, SWIFT
 	db 20, SLAM
 	db 26, THUNDERBOLT
 	db 33, AGILITY
@@ -1239,10 +1240,10 @@ OmastarEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 34, HORN_ATTACK
-	db 39, LEER
-	db 44, SPIKE_CANNON
-	db 49, HYDRO_PUMP
+	db 38, HORN_ATTACK
+	db 42, LEER
+	db 52, SPIKE_CANNON
+	db 60, HYDRO_PUMP
 	db 0
 
 JigglypuffEvosMoves:
@@ -1602,7 +1603,7 @@ MagikarpEvosMoves:
 	db EVOLVE_LEVEL, 20, GYARADOS
 	db 0
 ; Learnset
-	db 15, TACKLE
+	db 5, TACKLE
 	db 0
 
 MissingNo86EvosMoves:
@@ -1783,7 +1784,7 @@ BulbasaurEvosMoves:
 	db 0
 ; Learnset
 	db 7, LEECH_SEED
-	db 13, VINE_WHIP
+	db 11, VINE_WHIP
 	db 20, POISONPOWDER
 	db 27, RAZOR_LEAF
 	db 34, GROWTH
@@ -2014,7 +2015,7 @@ CharmanderEvosMoves:
 	db EVOLVE_LEVEL, 16, CHARMELEON
 	db 0
 ; Learnset
-	db 9, EMBER
+	db 8, EMBER
 	db 15, LEER
 	db 22, RAGE
 	db 30, SLASH
@@ -2167,4 +2168,9 @@ VictreebelEvosMoves:
 	db 13, WRAP
 	db 15, POISONPOWDER
 	db 18, SLEEP_POWDER
+	db 28, STUN_SPORE
+	db 35, ACID
+	db 42, RAZOR_LEAF
+	db 53, SLAM
 	db 0
+

@@ -1,5 +1,5 @@
 SeafoamIslandsB3FWildMons:
-	def_grass_wildmons 10 ; encounter rate
+	def_grass_wildmons 255 ; encounter rate
 	db 27, GOLBAT
 	db 36, ZUBAT
 	db 29, KRABBY
@@ -12,7 +12,7 @@ SeafoamIslandsB3FWildMons:
 	db 32, DEWGONG
 	end_grass_wildmons
 
-	def_water_wildmons 5 ; encounter rate
+	def_water_wildmons 255 ; encounter rate
 	db 25, TENTACOOL
 	db 30, TENTACOOL
 	db 20, TENTACOOL

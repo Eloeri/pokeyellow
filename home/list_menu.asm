@@ -50,7 +50,16 @@ DisplayListMenuID::
 	ld [wTopMenuItemY], a
 	ld a, 5
 	ld [wTopMenuItemX], a
+	ld a, [wTempFlag]
+	cp 1
+	ld a, 0
+	ld [wTempFlag], a
+	jr nz, .noSort
+	ld a, A_BUTTON | B_BUTTON | SELECT | START
+	jr .continue
+.noSort
 	ld a, A_BUTTON | B_BUTTON | SELECT
+.continue
 	ld [wMenuWatchedKeys], a
 	ld c, 10
 	call DelayFrames
@@ -132,6 +141,8 @@ DisplayListMenuIDLoop::
 	call GetItemPrice
 	pop hl
 	ld a, [wListMenuID]
+	cp a, MOVESLISTMENU
+	jr z, .skipStoringItemName
 	cp ITEMLISTMENU
 	jr nz, .skipGettingQuantity
 ; if it's an item menu
@@ -158,12 +169,13 @@ DisplayListMenuIDLoop::
 .storeChosenEntry ; store the menu entry that the player chose and return
 	ld de, wcd6d
 	call CopyToStringBuffer
+.skipStoringItemName
 	ld a, CHOSE_MENU_ITEM
 	ld [wMenuExitMethod], a
 	ld a, [wCurrentMenuItem]
 	ld [wChosenMenuItem], a
 	xor a
-	ldh [hJoy7], a ; joypad state update flag
+	ld [hJoy7], a ; joypad state update flag
 	ld hl, wd730
 	res 6, [hl] ; turn on letter printing delay
 	jp BankswitchBack
@@ -172,6 +184,8 @@ DisplayListMenuIDLoop::
 	jp nz, ExitListMenu ; if so, exit the menu
 	bit BIT_SELECT, a
 	jp nz, HandleItemListSwapping ; if so, allow the player to swap menu entries
+	bit 3,a ; was the start button pressed?
+	jp nz,.sortItems ; if so, allow the player to swap menu entries
 	ld b, a
 	bit BIT_D_DOWN, b
 	ld hl, wListScrollOffset
@@ -191,6 +205,10 @@ DisplayListMenuIDLoop::
 	jp z, DisplayListMenuIDLoop
 	dec [hl]
 	jp DisplayListMenuIDLoop
+.sortItems
+	rra ; Sets the zero flag to 0 so the sorting function will happen
+	rla
+	jp BankswitchBack
 
 DisplayChooseQuantityMenu::
 ; text box dimensions/coordinates for just quantity

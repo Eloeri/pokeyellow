@@ -3,11 +3,6 @@ _FileDataDestroyedText::
 	line "destroyed!"
 	prompt
 
-_WouldYouLikeToSaveText::
-	text "Would you like to"
-	line "SAVE the game?"
-	done
-
 _SavingText::
 	text "Saving..."
 	done
@@ -21,14 +16,6 @@ _OlderFileWillBeErasedText::
 	text "The older file"
 	line "will be erased to"
 	cont "save. Okay?"
-	done
-
-_WhenYouChangeBoxText::
-	text "When you change a"
-	line "#MON BOX, data"
-	cont "will be saved."
-
-	para "Is that okay?"
 	done
 
 _ChooseABoxText::
@@ -53,4 +40,19 @@ _StoppedEvolvingText::
 	text_ram wStringBuffer
 	text_start
 	line "stopped evolving!"
+	prompt
+
+_SortItemsText::
+	text "Would you like to"
+	next "sort items?"
+	done
+
+_SortComplete::
+	text "Sorting is"
+	next "Complete."
+	prompt
+
+_NothingToSort::
+	text "There is nothing"
+	next "to sort."
 	prompt

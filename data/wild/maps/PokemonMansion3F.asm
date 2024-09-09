@@ -1,5 +1,5 @@
 PokemonMansion3FWildMons:
-	def_grass_wildmons 10 ; encounter rate
+	def_grass_wildmons 255 ; encounter rate
 	db 40, RATTATA
 	db 40, RATICATE
 	db 32, GRIMER

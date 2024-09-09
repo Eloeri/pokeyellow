@@ -1,5 +1,5 @@
 RockTunnelB1FWildMons:
-	def_grass_wildmons 15 ; encounter rate
+	def_grass_wildmons 255 ; encounter rate
 	db 20, ZUBAT
 	db 17, GEODUDE
 	db 18, MACHOP

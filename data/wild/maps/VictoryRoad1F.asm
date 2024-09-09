@@ -1,5 +1,5 @@
 VictoryRoad1FWildMons:
-	def_grass_wildmons 15 ; encounter rate
+	def_grass_wildmons 255 ; encounter rate
 	db 26, GEODUDE
 	db 31, GEODUDE
 	db 36, GEODUDE
