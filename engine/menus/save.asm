@@ -136,10 +136,10 @@ SaveSAV:
 	farcall PrintSaveScreenText
 	ld c, 10
 	call DelayFrames
-	ld hl, WouldYouLikeToSaveText
-	call SaveSAVConfirm
-	and a   ;|0 = Yes|1 = No|
-	ret nz
+	;ld hl, WouldYouLikeToSaveText
+	;call SaveSAVConfirm
+	;and a   ;|0 = Yes|1 = No|
+	;ret nz
 	ld c, 10
 	call DelayFrames
 	ld a, [wSaveFileStatus]
@@ -153,18 +153,18 @@ SaveSAV:
 	ret nz
 .save
 	call SaveSAVtoSRAM
-	ld hl, SavingText
-	call PrintText
-	ld c, 128
-	call DelayFrames
-	ld hl, GameSavedText
-	call PrintText
+	;ld hl, SavingText
+	;call PrintText
+	;ld c, 128
+	;call DelayFrames
+	;ld hl, GameSavedText
+	;call PrintText
 	ld c, 10
 	call DelayFrames
 	ld a, SFX_SAVE
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
-	ld c, 30
+	ld c, 10
 	call DelayFrames
 	ret
 
@@ -178,17 +178,17 @@ SaveSAVConfirm:
 	ld a, [wCurrentMenuItem]
 	ret
 
-WouldYouLikeToSaveText:
-	text_far _WouldYouLikeToSaveText
-	text_end
+;WouldYouLikeToSaveText:
+;	text_far _WouldYouLikeToSaveText
+;	text_end
 
 SavingText:
 	text_far _SavingText
 	text_end
 
-GameSavedText:
-	text_far _GameSavedText
-	text_end
+;GameSavedText:
+;	text_far _GameSavedText
+;	text_end
 
 OlderFileWillBeErasedText:
 	text_far _OlderFileWillBeErasedText
@@ -334,12 +334,12 @@ BoxSRAMPointerTable:
 	dw sBox6 ; sBox12
 
 ChangeBox::
-	ld hl, WhenYouChangeBoxText
-	call PrintText
-	call YesNoChoice
-	ld a, [wCurrentMenuItem]
-	and a
-	ret nz ; return if No was chosen
+	;ld hl, WhenYouChangeBoxText
+	;call PrintText
+	;call YesNoChoice
+	;ld a, [wCurrentMenuItem]
+	;and a
+	;ret nz ; return if No was chosen
 	ld hl, wCurrentBoxNum
 	bit 7, [hl] ; is it the first time player is changing the box?
 	call z, EmptyAllSRAMBoxes ; if so, empty all boxes in SRAM
@@ -379,9 +379,9 @@ ChangeBox::
 	call SetMapTextPointer
 	ret
 
-WhenYouChangeBoxText:
-	text_far _WhenYouChangeBoxText
-	text_end
+;WhenYouChangeBoxText:
+;	text_far _WhenYouChangeBoxText
+;	text_end
 
 CopyBoxToOrFromSRAM:
 ; copy an entire box from hl to de with b as the SRAM bank

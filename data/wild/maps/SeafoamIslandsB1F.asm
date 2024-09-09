@@ -1,5 +1,5 @@
 SeafoamIslandsB1FWildMons:
-	def_grass_wildmons 10 ; encounter rate
+	def_grass_wildmons 255 ; encounter rate
 	db 27, ZUBAT
 	db 26, KRABBY
 	db 36, ZUBAT

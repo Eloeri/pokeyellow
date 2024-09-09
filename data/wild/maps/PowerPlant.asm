@@ -1,5 +1,5 @@
 PowerPlantWildMons:
-	def_grass_wildmons 10 ; encounter rate
+	def_grass_wildmons 255 ; encounter rate
 	db 30, MAGNEMITE
 	db 35, MAGNEMITE
 	db 33, MAGNETON

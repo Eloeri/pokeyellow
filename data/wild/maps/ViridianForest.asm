@@ -1,5 +1,5 @@
 ViridianForestWildMons:
-	def_grass_wildmons 25 ; encounter rate
+	def_grass_wildmons 255 ; encounter rate
 	db  3, CATERPIE
 	db  4, METAPOD
 	db  4, CATERPIE
@@ -14,3 +14,5 @@ ViridianForestWildMons:
 
 	def_water_wildmons 0 ; encounter rate
 	end_water_wildmons
+
+

@@ -19,7 +19,9 @@ PewterCity_Blocks: INCBIN "maps/PewterCity.blk"
 
 INCLUDE "data/maps/headers/CeruleanCity.asm"
 INCLUDE "data/maps/objects/CeruleanCity.asm"
+
 CeruleanCity_Blocks: INCBIN "maps/CeruleanCity.blk"
+
 
 INCLUDE "data/maps/headers/VermilionCity.asm"
 INCLUDE "data/maps/objects/VermilionCity.asm"
@@ -882,6 +884,8 @@ INCLUDE "data/maps/headers/CeruleanPokecenter.asm"
 INCLUDE "scripts/CeruleanPokecenter.asm"
 INCLUDE "data/maps/objects/CeruleanPokecenter.asm"
 CeruleanPokecenter_Blocks: INCBIN "maps/CeruleanPokecenter.blk"
+INCLUDE "scripts/move_deleter.asm"
+INCLUDE "scripts/move_relearner.asm"
 
 INCLUDE "data/maps/headers/CeruleanGym.asm"
 INCLUDE "scripts/CeruleanGym.asm"

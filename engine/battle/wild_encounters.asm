@@ -7,6 +7,9 @@ TryDoWildEncounter:
 	ld a, [wd736]
 	and a
 	ret nz
+	ld a, [hJoyHeld] ; Check what buttons are being pressed
+	and A_BUTTON ; Are you holding A?
+	ret nz 
 	callfar IsPlayerStandingOnDoorTileOrWarpTile
 	jr nc, .notStandingOnDoorOrWarpTile
 .CantEncounter

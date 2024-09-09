@@ -1,5 +1,5 @@
 Route17WildMons:
-	def_grass_wildmons 25 ; encounter rate
+	def_grass_wildmons 255 ; encounter rate
 	db 26, DODUO
 	db 27, FEAROW
 	db 27, DODUO

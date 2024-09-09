@@ -1,5 +1,5 @@
 Route25WildMons:
-	def_grass_wildmons 15 ; encounter rate
+	def_grass_wildmons 255 ; encounter rate
 	db 12, ODDISH
 	db 12, BELLSPROUT
 	db 13, PIDGEY

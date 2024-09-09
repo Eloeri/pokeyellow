@@ -1,5 +1,5 @@
 Route6WildMons:
-	def_grass_wildmons 15 ; encounter rate
+	def_grass_wildmons 255 ; encounter rate
 	db 15, PIDGEY
 	db 14, RATTATA
 	db  7, ABRA
@@ -12,7 +12,7 @@ Route6WildMons:
 	db  7, JIGGLYPUFF
 	end_grass_wildmons
 
-	def_water_wildmons 3 ; encounter rate
+	def_water_wildmons 255 ; encounter rate
 	db 15, PSYDUCK
 	db 15, PSYDUCK
 	db 15, PSYDUCK

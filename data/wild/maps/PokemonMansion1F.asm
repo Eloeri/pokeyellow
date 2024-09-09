@@ -1,5 +1,5 @@
 PokemonMansion1FWildMons:
-	def_grass_wildmons 10 ; encounter rate
+	def_grass_wildmons 255 ; encounter rate
 	db 34, RATTATA
 	db 34, RATICATE
 	db 23, GRIMER

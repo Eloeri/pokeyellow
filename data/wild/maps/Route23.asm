@@ -1,5 +1,5 @@
 Route23WildMons:
-	def_grass_wildmons 10 ; encounter rate
+	def_grass_wildmons 255 ; encounter rate
 	db 41, NIDORINO
 	db 41, NIDORINA
 	db 36, MANKEY
