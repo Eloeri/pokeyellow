@@ -239,17 +239,17 @@ OverworldLoopLessDelay::
 	call UpdateSprites
 
 .moveAhead2
-	;ld hl, wFlags_0xcd60
+	;ld hl, wMiscFlags
 	;res 2, [hl]
 	;xor a
 	;ld [wd435], a
 	;call DoBikeSpeedup
-	ld hl,wFlags_0xcd60
+	ld hl,wMiscFlags
 	res 2,[hl]
 	ld a,[wWalkBikeSurfState]
 	dec a ; riding a bike?
 	jr nz,.normalPlayerSpriteAdvancement
-	ld a,[wd736]
+	ld a,[wMovementFlags]
 	bit 6,a ; jumping a ledge?
 	jr nz,.normalPlayerSpriteAdvancement
 	call DoBikeSpeedup ; if riding a bike and not jumping a ledge
@@ -263,7 +263,7 @@ OverworldLoopLessDelay::
 	jr z, .surfFaster
 	; Add running shoes
 	ld a, [hJoyHeld] ; Check what buttons are being pressed
-	and B_BUTTON | A_BUTTON; Are you holding B?
+	and PAD_B | PAD_A; Are you holding B?
 	jr z, .notRunning ; If you aren't holding B, skip ahead to step normally.
 .surfFaster
 	call DoBikeSpeedup ; Make you go faster if you were holding B
@@ -365,7 +365,7 @@ NewBattle::
 ; function to make bikes twice as fast as walking
 DoBikeSpeedup::
 	ld a, [hJoyHeld] ; Check what buttons are being pressed for Shoes
-	and B_BUTTON | A_BUTTON; Are you holding B?
+	and PAD_B | PAD_A; Are you holding B?
 	jr z, .notRunning ; If you aren't holding B, skip ahead to step normally.
 	jp .goFaster ; Make you go faster if you were holding B
 .notRunning 

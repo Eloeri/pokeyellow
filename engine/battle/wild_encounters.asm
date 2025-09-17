@@ -8,7 +8,7 @@ TryDoWildEncounter:
 	and a ; is player exiting a door, jumping over a ledge, or fishing?
 	ret nz
 	ld a, [hJoyHeld] ; Check what buttons are being pressed
-	and A_BUTTON ; Are you holding A?
+	and PAD_A ; Are you holding A?
 	ret nz 
 	callfar IsPlayerStandingOnDoorTileOrWarpTile
 	jr nc, .notStandingOnDoorOrWarpTile

@@ -101,7 +101,7 @@ TalkToTrainer::
 	and a
 	jr z, .trainerNotYetFought     ; test trainer's flag
 	ldh a, [hJoyHeld]
-	bit BIT_SELECT, a
+	bit B_PAD_SELECT, a
 	jr nz, .trainerNotYetFought
 	ld a, $6
 	call ReadTrainerHeaderInfo     ; print after battle text

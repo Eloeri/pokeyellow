@@ -30,7 +30,7 @@ BoulderText::
 	pop af
 	ld [wWhichPokemon], a
 	call GetPartyMonName2
-	predef PrintStrengthTxt
+	predef PrintStrengthText
 .done
 	jp TextScriptEnd
 
