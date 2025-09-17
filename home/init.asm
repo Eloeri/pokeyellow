@@ -7,17 +7,6 @@ SoftReset::
 
 Init::
 ;  Program init.
-
-DEF rLCDC_DEFAULT EQU %11100011
-; * LCD enabled
-; * Window tile map at $9C00
-; * Window display enabled
-; * BG and window tile data at $8800
-; * BG tile map at $9800
-; * 8x8 OBJ size
-; * OBJ display enabled
-; * BG display enabled
-
 	di
 
 	xor a
@@ -35,7 +24,7 @@ DEF rLCDC_DEFAULT EQU %11100011
 	ldh [rOBP0], a
 	ldh [rOBP1], a
 
-	ld a, rLCDC_ENABLE_MASK
+	ld a, LCDC_ON
 	ldh [rLCDC], a
 	call DisableLCD
 
@@ -61,7 +50,7 @@ DEF rLCDC_DEFAULT EQU %11100011
 
 	ld a, BANK(WriteDMACodeToHRAM)
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	call WriteDMACodeToHRAM
 
 	xor a
@@ -72,7 +61,7 @@ DEF rLCDC_DEFAULT EQU %11100011
 	ldh [rIF], a
 	ld [wc0f3], a
 	ld [wc0f3 + 1], a
-	ld a, 1 << VBLANK + 1 << TIMER + 1 << SERIAL
+	ld a, IE_VBLANK | IE_TIMER | IE_SERIAL
 	ldh [rIE], a
 
 	ld a, 144 ; move the window off-screen
@@ -89,7 +78,7 @@ DEF rLCDC_DEFAULT EQU %11100011
 	ld h, HIGH(vBGMap1)
 	call ClearBgMap
 
-	ld a, rLCDC_DEFAULT
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	ld a, 16
 	ldh [hSoftReset], a
@@ -102,7 +91,7 @@ DEF rLCDC_DEFAULT EQU %11100011
 	ld a, BANK(SFX_Shooting_Star)
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a
-	ld a, $9c
+	ld a, HIGH(vBGMap1)
 	ldh [hAutoBGTransferDest + 1], a
 	xor a
 	ldh [hAutoBGTransferDest], a
@@ -115,7 +104,7 @@ DEF rLCDC_DEFAULT EQU %11100011
 	call ClearVram
 	call GBPalNormal
 	call ClearSprites
-	ld a, rLCDC_DEFAULT
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 
 	jp PrepareTitleScreen

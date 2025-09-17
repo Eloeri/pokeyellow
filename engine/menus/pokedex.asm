@@ -9,7 +9,7 @@ ShowPokedexMenu:
 	ld [wListScrollOffset], a
 	ld [wLastMenuItem], a
 	inc a
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	ldh [hJoy7], a
 .setUpGraphics
 	callfar LoadPokedexTilePatterns
@@ -28,7 +28,7 @@ ShowPokedexMenu:
 	inc hl
 	ld a, 6
 	ld [hli], a ; max menu item ID
-	ld [hl], D_LEFT | D_RIGHT | B_BUTTON | A_BUTTON
+	ld [hl], PAD_LEFT | PAD_RIGHT | PAD_B | PAD_A
 	call HandlePokedexListMenu
 	jr c, .goToSideMenu ; if the player chose a pokemon from the list
 .exitPokedex
@@ -37,7 +37,7 @@ ShowPokedexMenu:
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	ldh [hJoy7], a
-	ld [wUnusedCD3A], a
+	ld [wUnusedOverrideSimulatedJoypadStatesIndex], a
 	ld [wOverrideSimulatedJoypadStatesMask], a
 	pop af
 	ld [wListScrollOffset], a
@@ -72,8 +72,8 @@ HandlePokedexSideMenu:
 	push af
 	add b
 	inc a
-	ld [wd11e], a
-	ld a, [wd11e]
+	ld [wPokedexNum], a
+	ld a, [wPokedexNum]
 	push af
 	ld a, [wDexMaxSeenMon]
 	push af ; this doesn't need to be preserved
@@ -92,7 +92,7 @@ HandlePokedexSideMenu:
 	inc hl
 	ld a, 4
 	ld [hli], a ; max menu item ID
-	ld a, A_BUTTON | B_BUTTON
+	ld a, PAD_A | PAD_B
 	ld [hli], a ; menu watched keys (A button and B button)
 	xor a
 	ld [hli], a ; old menu item ID
@@ -100,7 +100,7 @@ HandlePokedexSideMenu:
 	ldh [hJoy7], a
 .handleMenuInput
 	call HandleMenuInput
-	bit BIT_B_BUTTON, a
+	bit B_PAD_B, a
 	ld b, 2
 	jr nz, .buttonBPressed
 	ld a, [wCurrentMenuItem]
@@ -124,7 +124,7 @@ ENDC
 	pop af
 	ld [wDexMaxSeenMon], a
 	pop af
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	pop af
 	ld [wListScrollOffset], a
 	pop af
@@ -157,7 +157,7 @@ ENDC
 
 ; play pokemon cry
 .choseCry
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	call GetCryData
 	call PlaySound
 	jr .handleMenuInput
@@ -172,8 +172,8 @@ ENDC
 	push af
 	xor a
 	ldh [hTileAnimations], a
-	ld a, [wd11e]
-	ld [wcf91], a
+	ld a, [wPokedexNum]
+	ld [wCurPartySpecies], a
 	callfar PrintPokedexEntry
 	xor a
 	ldh [hAutoBGTransferEnabled], a
@@ -191,12 +191,12 @@ HandlePokedexListMenu:
 	call Pokedex_PlacePokemonList
 	call GBPalNormal
 	call HandleMenuInput
-	bit BIT_B_BUTTON, a ; was the B button pressed?
+	bit B_PAD_B, a ; was the B button pressed?
 	jp nz, .buttonBPressed
-	bit BIT_A_BUTTON, a ; was the A button pressed?
+	bit B_PAD_A, a ; was the A button pressed?
 	jp nz, .buttonAPressed
 .checkIfUpPressed
-	bit BIT_D_UP, a ; was Up pressed?
+	bit B_PAD_UP, a ; was Up pressed?
 	jr z, .checkIfDownPressed
 .upPressed ; scroll up one row
 	ld a, [wListScrollOffset]
@@ -207,7 +207,7 @@ HandlePokedexListMenu:
 	jp .loop
 
 .checkIfDownPressed
-	bit BIT_D_DOWN, a ; was Down pressed?
+	bit B_PAD_DOWN, a ; was Down pressed?
 	jr z, .checkIfRightPressed
 .downPressed ; scroll down one row
 	ld a, [wDexMaxSeenMon]
@@ -223,7 +223,7 @@ HandlePokedexListMenu:
 	jp .loop
 
 .checkIfRightPressed
-	bit BIT_D_RIGHT, a ; was Right pressed?
+	bit B_PAD_RIGHT, a ; was Right pressed?
 	jr z, .checkIfLeftPressed
 .rightPressed ; scroll down 7 rows
 	ld a, [wDexMaxSeenMon]
@@ -242,7 +242,7 @@ HandlePokedexListMenu:
 	jp .loop
 
 .checkIfLeftPressed ; scroll up 7 rows
-	bit BIT_D_LEFT, a ; was Left pressed?
+	bit B_PAD_LEFT, a ; was Left pressed?
 	jr z, .buttonAPressed
 .leftPressed
 	ld a, [wListScrollOffset]
@@ -359,7 +359,7 @@ Pokedex_PlacePokemonList:
 	call ClearScreenArea
 	hlcoord 1, 3
 	ld a, [wListScrollOffset]
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	ld d, 7
 	ld a, [wDexMaxSeenMon]
 	cp 7
@@ -370,17 +370,17 @@ Pokedex_PlacePokemonList:
 ; loop to print pokemon pokedex numbers and names
 ; if the player has owned the pokemon, it puts a pokeball beside the name
 .printPokemonLoop
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	inc a
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	push af
 	push de
 	push hl
 	ld de, -SCREEN_WIDTH
 	add hl, de
-	ld de, wd11e
+	ld de, wPokedexNum
 	lb bc, LEADING_ZEROES | 1, 3
-	call PrintNumber ; print the pokedex number
+	call PrintNumber
 	ld de, SCREEN_WIDTH
 	add hl, de
 	dec hl
@@ -413,7 +413,7 @@ Pokedex_PlacePokemonList:
 	add hl, bc
 	pop de
 	pop af
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	dec d
 	jr nz, .printPokemonLoop
 	ld a, 01
@@ -423,10 +423,10 @@ Pokedex_PlacePokemonList:
 
 ; tests if a pokemon's bit is set in the seen or owned pokemon bit fields
 ; INPUT:
-; [wd11e] = pokedex number
+; [wPokedexNum] = pokedex number
 ; hl = address of bit field
 IsPokemonBitSet:
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	dec a
 	ld c, a
 	ld b, FLAG_TEST
@@ -444,28 +444,28 @@ ShowPokedexData:
 
 ; function to display pokedex data from inside the pokedex
 ShowPokedexDataInternal:
-	ld hl, wd72c
-	set 1, [hl]
+	ld hl, wStatusFlags2
+	set BIT_NO_AUDIO_FADE_OUT, [hl]
 	ld a, $33 ; 3/7 volume
-	ldh [rNR50], a
+	ldh [rAUDVOL], a
 	ldh a, [hTileAnimations]
 	push af
 	xor a
 	ldh [hTileAnimations], a
 	call GBPalWhiteOut ; zero all palettes
-	ld a, [wd11e] ; pokemon ID
-	ld [wcf91], a
+	ld a, [wPokedexNum]
+	ld [wCurPartySpecies], a
 	push af
 	ld b, SET_PAL_POKEDEX
 	call RunPaletteCommand
 	pop af
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	call DrawDexEntryOnScreen
 	call c, Pokedex_PrintFlavorTextAtRow11
 .waitForButtonPress
 	call JoypadLowSensitivity
 	ldh a, [hJoy5]
-	and A_BUTTON | B_BUTTON
+	and PAD_A | PAD_B
 	jr z, .waitForButtonPress
 	pop af
 	ldh [hTileAnimations], a
@@ -474,10 +474,10 @@ ShowPokedexDataInternal:
 	call RunDefaultPaletteCommand
 	call LoadTextBoxTilePatterns
 	call GBPalNormal
-	ld hl, wd72c
-	res 1, [hl]
+	ld hl, wStatusFlags2
+	res BIT_NO_AUDIO_FADE_OUT, [hl]
 	ld a, $77 ; max volume
-	ldh [rNR50], a
+	ldh [rAUDVOL], a
 	ret
 
 HeightWeightText:
@@ -537,7 +537,7 @@ DrawDexEntryOnScreen:
 	call PlaceString
 
 	ld hl, PokedexEntryPointers
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	dec a
 	ld e, a
 	ld d, 0
@@ -553,7 +553,7 @@ DrawDexEntryOnScreen:
 	ld h, b
 	ld l, c
 	push de
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	push af
 	call IndexToPokedex
 
@@ -562,16 +562,16 @@ DrawDexEntryOnScreen:
 	ld [hli], a
 	ld a, "<DOT>"
 	ld [hli], a
-	ld de, wd11e
+	ld de, wPokedexNum
 	lb bc, LEADING_ZEROES | 1, 3
 	call PrintNumber ; print pokedex number
 
 	ld hl, wPokedexOwned
 	call IsPokemonBitSet
 	pop af
-	ld [wd11e], a
-	ld a, [wcf91]
-	ld [wd0b5], a
+	ld [wPokedexNum], a
+	ld a, [wCurPartySpecies]
+	ld [wCurSpecies], a
 	pop de
 
 	push af
@@ -584,8 +584,8 @@ DrawDexEntryOnScreen:
 	call GetMonHeader ; load pokemon picture location
 	hlcoord 1, 1
 	call LoadFlippedFrontSpriteByMonIndex ; draw pokemon picture
-	ld a, [wcf91]
-	call PlayCry ; play pokemon cry
+	ld a, [wCurPartySpecies]
+	call PlayCry
 
 	pop hl
 	pop de
@@ -683,11 +683,11 @@ Pokedex_PrepareDexEntryForPrinting:
 	ld h, a
 	bccoord 1, 1
 	ldh a, [hUILayoutFlags]
-	set 3, a
+	set BIT_PAGE_CHAR_IS_NEXT, a
 	ldh [hUILayoutFlags], a
 	call Pokedex_PrintFlavorTextAtBC
 	ldh a, [hUILayoutFlags]
-	res 3, a
+	res BIT_PAGE_CHAR_IS_NEXT, a
 	ldh [hUILayoutFlags], a
 	ret
 
@@ -712,10 +712,10 @@ DrawTileLine:
 INCLUDE "data/pokemon/dex_entries.asm"
 
 PokedexToIndex:
-	; converts the Pokédex number at wd11e to an index
+	; converts the Pokédex number at [wPokedexNum] to an index
 	push bc
 	push hl
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	ld b, a
 	ld c, 0
 	ld hl, PokedexOrder
@@ -727,23 +727,23 @@ PokedexToIndex:
 	jr nz, .loop
 
 	ld a, c
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	pop hl
 	pop bc
 	ret
 
 IndexToPokedex:
-	; converts the index number at wd11e to a Pokédex number
+	; converts the index number at [wPokedexNum] to a Pokédex number
 	push bc
 	push hl
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	dec a
 	ld hl, PokedexOrder
 	ld b, 0
 	ld c, a
 	add hl, bc
 	ld a, [hl]
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	pop hl
 	pop bc
 	ret

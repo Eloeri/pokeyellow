@@ -50,9 +50,9 @@ HandleMenuInput_::
 	ld [wCheckFor180DegreeTurn], a
 	ldh a, [hJoy5]
 	ld b, a
-	bit BIT_A_BUTTON, a
+	bit B_PAD_A, a
 	jr nz, .checkOtherKeys
-	bit BIT_D_UP, a
+	bit B_PAD_UP, a
 	jr z, .checkIfDownPressed
 .upPressed
 	ld a, [wCurrentMenuItem] ; selected menu item
@@ -70,7 +70,7 @@ HandleMenuInput_::
 	ld [wCurrentMenuItem], a ; wrap to the bottom of the menu
 	jr .checkOtherKeys
 .checkIfDownPressed
-	bit BIT_D_DOWN, a
+	bit B_PAD_DOWN, a
 	jr z, .checkOtherKeys
 .downPressed
 	ld a, [wCurrentMenuItem]
@@ -93,12 +93,12 @@ HandleMenuInput_::
 	jp z, .loop1
 .checkIfAButtonOrBButtonPressed
 	ldh a, [hJoy5]
-	and A_BUTTON | B_BUTTON
+	and PAD_A | PAD_B
 	jr z, .skipPlayingSound
 .AButtonOrBButtonPressed
 	push hl
-	ld hl, wFlags_0xcd60
-	bit 5, [hl]
+	ld hl, wMiscFlags
+	bit BIT_NO_MENU_BUTTON_SOUND, [hl]
 	pop hl
 	jr nz, .skipPlayingSound
 	ld a, SFX_PRESS_AB
@@ -140,9 +140,9 @@ PlaceMenuCursor::
 	ld bc, 40
 	push af
 	ldh a, [hUILayoutFlags]
-	bit 1, a ; is the menu double spaced?
+	bit BIT_DOUBLE_SPACED_MENU, a
 	jr z, .doubleSpaced1
-	ld bc, 20
+	ld bc, SCREEN_WIDTH
 .doubleSpaced1
 	pop af
 .oldMenuItemLoop
@@ -164,9 +164,9 @@ PlaceMenuCursor::
 	ld bc, 40
 	push af
 	ldh a, [hUILayoutFlags]
-	bit 1, a ; is the menu double spaced?
+	bit BIT_DOUBLE_SPACED_MENU, a
 	jr z, .doubleSpaced2
-	ld bc, 20
+	ld bc, SCREEN_WIDTH
 .doubleSpaced2
 	pop af
 .currentMenuItemLoop
@@ -270,7 +270,7 @@ EnableAutoTextBoxDrawing::
 	jr AutoTextBoxDrawingCommon
 
 DisableAutoTextBoxDrawing::
-	ld a, TRUE
+	ld a, 1 << BIT_NO_AUTO_TEXT_BOX
 
 AutoTextBoxDrawingCommon::
 	ld [wAutoTextBoxDrawingControl], a
