@@ -1011,7 +1011,8 @@ ItemUseMedicine:
 	xor a
 	ld [wCalculateWhoseStats], a
 	callfar CalculateModifiedStats
-	callfar ApplyBadgeStatBoosts	jp .doneHealing
+	callfar ApplyBadgeStatBoosts	
+	jp .doneHealing
 
 .healHP
 	inc hl ; hl = address of current HP
