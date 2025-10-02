@@ -83,7 +83,7 @@ HiddenCoins:
 	cp 20
 	jr z, .bcd20
 	cp 40
-	jr z, .bcd20 ; should be bcd40
+	jr z, .bcd40 ; should be bcd40
 	jr .bcd100
 
 .doNotPickUpCoins

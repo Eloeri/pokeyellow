@@ -1008,8 +1008,10 @@ ItemUseMedicine:
 	ld de, wBattleMonStats
 	ld bc, NUM_STATS * 2
 	call CopyData ; copy party stats to in-battle stat data
-	predef DoubleOrHalveSelectedStats
-	jp .doneHealing
+	xor a
+	ld [wCalculateWhoseStats], a
+	callfar CalculateModifiedStats
+	callfar ApplyBadgeStatBoosts	jp .doneHealing
 
 .healHP
 	inc hl ; hl = address of current HP
@@ -2325,6 +2327,7 @@ ItemUsePPRestore:
 ; how many PP Ups have been used on the move.
 ; So, Max Ethers and Max Elixirs will not be detected as having no effect on
 ; a move with full PP if the move has had any PP Ups used on it.
+	and %00111111 ; lower 6 bits store current PP
 	cp b ; does current PP equal max PP?
 	ret z
 	jr .storeNewAmount
