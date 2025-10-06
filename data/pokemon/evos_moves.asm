@@ -2015,7 +2015,8 @@ CharmanderEvosMoves:
 	db EVOLVE_LEVEL, 16, CHARMELEON
 	db 0
 ; Learnset
-	db 8, EMBER
+	db 7, EMBER
+	db 13, METAL_CLAW
 	db 15, LEER
 	db 22, RAGE
 	db 30, SLASH

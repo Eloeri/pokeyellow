@@ -164,6 +164,7 @@ AttackAnimationPointers:
 	dw SuperFangAnim
 	dw SlashAnim
 	dw SubstituteAnim
+	dw MetalClawAnim
 	dw StruggleAnim
 	assert_table_length NUM_ATTACKS
 	dw ShowPicAnim
@@ -272,6 +273,7 @@ ThunderPunchAnim:
 	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
 	db -1 ; end
 
+MetalClawAnim:
 ScratchAnim:
 	battle_anim SCRATCH, SUBANIM_0_SCRATCHES, 0, 6
 	db -1 ; end
