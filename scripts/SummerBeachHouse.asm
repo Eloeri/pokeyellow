@@ -14,13 +14,7 @@ SummerBeachHouse_TextPointers:
 SummerBeachHouseSurfinDudeText:
 	text_asm
 	ld a, [wd471]
-	vc_patch Bypass_need_Pikachu_with_Surf_for_minigame
-IF DEF (_YELLOW_VC)
 	bit 7, a
-ELSE
-	bit 6, a
-ENDC
-	vc_patch_end
 	jr nz, .next
 	ld hl, .SurfinDudeText4
 	call PrintText
@@ -137,13 +131,7 @@ SummerBeachHousePrinterText:
 	ld a, 1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld a, [wd471]
-	vc_patch Bypass_need_Pikachu_with_Surf_for_high_score
-IF DEF(_YELLOW_VC)
 	bit 7, a
-ELSE
-	bit 6, a
-ENDC
-	vc_patch_end
 	jr z, .asm_f2369
 
 	ld hl, wd492
