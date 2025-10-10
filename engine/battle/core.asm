@@ -133,6 +133,7 @@ SetScrollXForSlidingPlayerBodyLeft:
 	ret
 
 StartBattle:
+	farcall StorePKMNLevels
 	xor a
 	ld [wPartyGainExpFlags], a
 	ld [wPartyFoughtCurrentEnemyFlags], a
