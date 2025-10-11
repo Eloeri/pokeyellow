@@ -35,7 +35,7 @@ _CableClubNPCMakingPreparationsText::
 _FlashLightsAreaText::
 	text "A blinding FLASH"
 	line "lights the area!"
-	prompt
+	autodone
 
 _WarpToLastPokemonCenterText::
 	text "Warp to the last"
@@ -46,33 +46,33 @@ _CannotUseTeleportNowText::
 	text_ram wNameBuffer
 	text " can't"
 	line "use TELEPORT now."
-	prompt
+	autodone
 
 _CannotFlyHereText::
 	text_ram wNameBuffer
 	text " can't"
 	line "FLY here."
-	prompt
+	autodone
 
 _NotHealthyEnoughText::
 	text "Not healthy"
 	line "enough."
-	prompt
+	autodone
 
 _NewBadgeRequiredText::
 	text "No! A new BADGE"
 	line "is required."
-	prompt
+	autodone
 
 _CannotUseItemsHereText::
 	text "You can't use items"
 	line "here."
-	prompt
+	autodone
 
 _CannotGetOffHereText::
 	text "You can't get off"
 	line "here."
-	prompt
+	autodone
 
 _UsedStrengthText::
 	text_ram wNameBuffer
@@ -84,17 +84,17 @@ _CanMoveBouldersText::
 	text_ram wNameBuffer
 	text " can"
 	line "move boulders."
-	prompt
+	autodone
 
 _CurrentTooFastText::
 	text "The current is"
 	line "much too fast!"
-	prompt
+	autodone
 
 _CyclingIsFunText::
 	text "Cycling is fun!"
 	line "Forget SURFing!"
-	prompt
+	autodone
 
 _GotMonText::
 	text "<PLAYER> got"

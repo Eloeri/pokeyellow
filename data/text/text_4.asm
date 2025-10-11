@@ -1,7 +1,7 @@
 _FileDataDestroyedText::
 	text "The file data is"
 	line "destroyed!"
-	prompt
+	autodone
 
 _SavingText::
 	text "Saving..."
@@ -40,7 +40,7 @@ _StoppedEvolvingText::
 	text_ram wStringBuffer
 	text_start
 	line "stopped evolving!"
-	prompt
+	autodone
 
 _SortItemsText::
 	text "Would you like to"
@@ -50,9 +50,9 @@ _SortItemsText::
 _SortComplete::
 	text "Sorting is"
 	next "Complete."
-	prompt
+	autodone
 
 _NothingToSort::
 	text "There is nothing"
 	next "to sort."
-	prompt
+	autodone

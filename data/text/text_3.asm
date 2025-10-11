@@ -2,24 +2,24 @@ _EnemyAppearedText::
 	text_ram wEnemyMonNick
 	text_start
 	line "appeared!"
-	prompt
+	autodone
 
 _TrainerWantsToFightText::
 	text_ram wTrainerName
 	text " wants"
 	line "to fight!"
-	prompt
+	autodone
 
 _UnveiledGhostText::
 	text "SILPH SCOPE"
 	line "unveiled the"
 	cont "GHOST's identity!"
-	prompt
+	autodone
 
 _GhostCantBeIDdText::
 	text "Darn! The GHOST"
 	line "can't be ID'd!"
-	prompt
+	autodone
 
 _GoText::
 	text "Go! @"
@@ -86,7 +86,7 @@ _WhichFloorText::
 _SleepingPikachuText1::
 	text "There isn't any"
 	line "response..."
-	prompt
+	autodone
 
 _PartyMenuNormalText::
 	text "Choose a #MON."
@@ -173,7 +173,7 @@ _RareCandyText::
 _TurnedOnPC1Text::
 	text "<PLAYER> turned on"
 	line "the PC."
-	prompt
+	autodone
 
 _AccessedBillsPCText::
 	text "Accessed BILL's"
@@ -181,7 +181,7 @@ _AccessedBillsPCText::
 
 	para "Accessed #MON"
 	line "Storage System."
-	prompt
+	autodone
 
 _AccessedSomeonesPCText::
 	text "Accessed someone's"
@@ -189,19 +189,19 @@ _AccessedSomeonesPCText::
 
 	para "Accessed #MON"
 	line "Storage System."
-	prompt
+	autodone
 
 _AccessedMyPCText::
 	text "Accessed my PC."
 
 	para "Accessed Item"
 	line "Storage System."
-	prompt
+	autodone
 
 _TurnedOnPC2Text::
 	text "<PLAYER> turned on"
 	line "the PC."
-	prompt
+	autodone
 
 _WhatDoYouWantText::
 	text "What do you want"
@@ -221,17 +221,17 @@ _ItemWasStoredText::
 	text_ram wNameBuffer
 	text " was"
 	line "stored via PC."
-	prompt
+	autodone
 
 _NothingToDepositText::
 	text "You have nothing"
 	line "to deposit."
-	prompt
+	autodone
 
 _NoRoomToStoreText::
 	text "No room left to"
 	line "store items."
-	prompt
+	autodone
 
 _WhatToWithdrawText::
 	text "What do you want"
@@ -247,17 +247,17 @@ _WithdrewItemText::
 	line "@"
 	text_ram wNameBuffer
 	text "."
-	prompt
+	autodone
 
 _NothingStoredText::
 	text "There is nothing"
 	line "stored."
-	prompt
+	autodone
 
 _CantCarryMoreText::
 	text "You can't carry"
 	line "any more items."
-	prompt
+	autodone
 
 _WhatToTossText::
 	text "What do you want"
@@ -274,16 +274,16 @@ _AccessedHoFPCText::
 
 	para "Accessed the HALL"
 	line "OF FAME List."
-	prompt
+	autodone
 
 _SleepingPikachuText2::
 	text "There isn't any"
 	line "response..."
-	prompt
+	autodone
 
 _SwitchOnText::
 	text "Switch on!"
-	prompt
+	autodone
 
 _WhatText::
 	text "What?"
@@ -300,17 +300,17 @@ _MonWasStoredText::
 	line "stored in Box @"
 	text_ram wBoxNumString
 	text "."
-	prompt
+	autodone
 
 _CantDepositLastMonText::
 	text "You can't deposit"
 	line "the last #MON!"
-	prompt
+	autodone
 
 _BoxFullText::
 	text "Oops! This Box is"
 	line "full of #MON."
-	prompt
+	autodone
 
 _MonIsTakenOutText::
 	text_ram wStringBuffer
@@ -319,12 +319,12 @@ _MonIsTakenOutText::
 	cont "Got @"
 	text_ram wStringBuffer
 	text "."
-	prompt
+	autodone
 
 _NoMonText::
 	text "What? There are"
 	line "no #MON here!"
-	prompt
+	autodone
 
 _CantTakeMonText::
 	text "You can't take"
@@ -332,13 +332,13 @@ _CantTakeMonText::
 
 	para "Deposit #MON"
 	line "first."
-	prompt
+	autodone
 
 _PikachuUnhappyText::
 	text_ram wNameBuffer
 	text " looks"
 	line "unhappy about it!"
-	prompt
+	autodone
 
 _ReleaseWhichMonText::
 	text "Release which"
@@ -360,7 +360,7 @@ _MonWasReleasedText::
 	cont "Bye @"
 	text_ram wStringBuffer
 	text "!"
-	prompt
+	autodone
 
 _RequireCoinCaseText::
 	text "A COIN CASE is"
@@ -370,7 +370,7 @@ _RequireCoinCaseText::
 _ExchangeCoinsForPrizesText::
 	text "We exchange your"
 	line "coins for prizes."
-	prompt
+	autodone
 
 _WhichPrizeText::
 	text "Which prize do"
@@ -418,7 +418,7 @@ _AccessedOaksPCText::
 
 	para "Accessed #DEX"
 	line "Rating System."
-	prompt
+	autodone
 
 _ExpressionText::
 	text "This expression is"

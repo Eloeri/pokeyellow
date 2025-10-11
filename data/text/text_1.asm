@@ -20,17 +20,17 @@ _TrainerNameText::
 
 _NoNibbleText::
 	text "Not even a nibble!"
-	prompt
+	autodone
 
 _NothingHereText::
 	text "Looks like there's"
 	line "nothing here."
-	prompt
+	autodone
 
 _ItsABiteText::
 	text "Oh!"
 	line "It's a bite!"
-	prompt
+	autodone
 
 _ExclamationText::
 	text "!"

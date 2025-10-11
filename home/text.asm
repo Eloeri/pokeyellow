@@ -84,9 +84,10 @@ PlaceNextChar::
 
 ; Check against a dictionary
 	dict "<NULL>",    NullChar
-	dict "<SCROLL>",  _ContTextNoPause
+	dict "<SCROLL>",  _ContTextPauseShort
 	dict "<_CONT>",   _ContText
 	dict "<PARA>",    Paragraph
+	dict "<ATPRA>",   AutoParagraph
 	dict "<PAGE>",    PageChar
 	dict "<PLAYER>",  PrintPlayerName
 	dict "<RIVAL>",   PrintRivalName
@@ -98,6 +99,7 @@ PlaceNextChar::
 	dict "<CONT>",    ContText
 	dict "<……>",      SixDotsChar
 	dict "<DONE>",    DoneText
+	dict "<ATDNE>",   AutoDoneText
 	dict "<PROMPT>",  PromptText
 	dict "<PKMN>",    PlacePKMN
 	dict "<DEXEND>",  PlaceDexEnd
@@ -227,6 +229,12 @@ DoneText::
 .stop:
 	text_end
 
+AutoDoneText::
+	call ProtectedDelay3
+	ld c, 20
+	call DelayFrames
+	jr DoneText
+
 Paragraph::
 	push de
 	ld a, "▼"
@@ -240,6 +248,20 @@ Paragraph::
 	call DelayFrames
 	pop de
 	hlcoord 1, 14
+	jp NextChar
+
+AutoParagraph::
+	push de
+	call ProtectedDelay3
+	ld c, 10
+	call DelayFrames
+	hlcoord 1, 14
+	lb bc, 4, 18
+	call ClearScreenArea
+	ld c, 20
+	call DelayFrames
+	hlcoord 1, 14
+	pop de
 	jp NextChar
 
 PageChar::
@@ -280,6 +302,16 @@ _ContTextNoPause::
 	call ScrollTextUpOneLine
 	call ScrollTextUpOneLine
 	hlcoord 1, 16
+	pop de
+	jp NextChar
+
+_ContTextPauseShort::
+	push de
+	call ManualTextScroll
+	call ManualTextScroll
+	hlcoord 1, 16
+	ld c, 5
+	call DelayFrames
 	pop de
 	jp NextChar
 

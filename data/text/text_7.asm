@@ -19,7 +19,7 @@ _PlayerBlackedOutText::
 
 	para "<PLAYER> blacked"
 	line "out!"
-	prompt
+	autodone
 
 _RepelWoreOffText::
 	text "REPEL's effect"
@@ -42,17 +42,17 @@ _PokemartTellBuyPriceText::
 _PokemartBoughtItemText::
 	text "Here you are!"
 	line "Thank you!"
-	prompt
+	autodone
 
 _PokemartNotEnoughMoneyText::
 	text "You don't have"
 	line "enough money."
-	prompt
+	autodone
 
 _PokemartItemBagFullText::
 	text "You can't carry"
 	line "any more items."
-	prompt
+	autodone
 
 _PokemonSellingGreetingText::
 	text "What would you"
@@ -69,12 +69,12 @@ _PokemartTellSellPriceText::
 _PokemartItemBagEmptyText::
 	text "You don't have"
 	line "anything to sell."
-	prompt
+	autodone
 
 _PokemartUnsellableItemText::
 	text "I can't put a"
 	line "price on that."
-	prompt
+	autodone
 
 _PokemartThankYouText::
 	text "Thank you!"
@@ -112,7 +112,7 @@ _DidNotLearnText::
 	cont "@"
 	text_ram wStringBuffer
 	text "!"
-	prompt
+	autodone
 
 _TryingToLearnText::
 	text_ram wLearnMoveMonName
@@ -153,12 +153,12 @@ _ForgotAndText::
 	text "!"
 
 	para "And..."
-	prompt
+	autodone
 
 _HMCantDeleteText::
 	text "HM techniques"
 	line "can't be deleted!"
-	prompt
+	autodone
 
 _PokemonCenterWelcomeText::
 	text "Welcome to our"
@@ -167,7 +167,7 @@ _PokemonCenterWelcomeText::
 	para "We heal your"
 	line "#MON back to"
 	cont "perfect health!"
-	prompt
+	autodone
 
 _ShallWeHealYourPokemonText::
 	text "Shall we heal your"
@@ -183,7 +183,7 @@ _PokemonFightingFitText::
 	text "Thank you!"
 	line "Your #MON are"
 	cont "fighting fit!"
-	prompt
+	autodone
 
 _PokemonCenterFarewellText::
 	text "We hope to see"
