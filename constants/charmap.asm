@@ -3,6 +3,8 @@
 ; Control characters (see home/text.asm)
 
 	charmap "<NULL>",    $00
+	charmap "<ATPRA>",	 $47
+	charmap "<ATDNE>",	 $48
 	charmap "<PAGE>",    $49
 	charmap "<PKMN>",    $4a ; "<PK><MN>"
 	charmap "<_CONT>",   $4b ; implements "<CONT>"
@@ -25,8 +27,7 @@
 	charmap "<TRAINER>", $5d ; "TRAINER"
 	charmap "<ROCKET>",  $5e ; "ROCKET"
 	charmap "<DEXEND>",  $5f
-	charmap "<ATPRA>",	 $60
-	charmap "<ATDNE>",	 $61
+
 
 ; Actual characters (from gfx/font/font_extra.png)
 
