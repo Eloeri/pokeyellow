@@ -62,17 +62,17 @@ _NotHealthyEnoughText::
 _NewBadgeRequiredText::
 	text "No! A new BADGE"
 	line "is required."
-	autodone
+	prompt
 
 _CannotUseItemsHereText::
 	text "You can't use items"
 	line "here."
-	autodone
+	prompt
 
 _CannotGetOffHereText::
 	text "You can't get off"
 	line "here."
-	autodone
+	prompt
 
 _UsedStrengthText::
 	text_ram wNameBuffer
@@ -84,17 +84,17 @@ _CanMoveBouldersText::
 	text_ram wNameBuffer
 	text " can"
 	line "move boulders."
-	autodone
+	prompt
 
 _CurrentTooFastText::
 	text "The current is"
 	line "much too fast!"
-	autodone
+	prompt
 
 _CyclingIsFunText::
 	text "Cycling is fun!"
 	line "Forget SURFing!"
-	autodone
+	prompt
 
 _GotMonText::
 	text "<PLAYER> got"

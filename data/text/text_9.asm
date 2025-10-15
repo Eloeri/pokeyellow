@@ -39,14 +39,14 @@ _ItemUseBallText07::
 	text " was"
 	line "transferred to"
 	cont "BILL's PC!"
-	autodone
+	prompt
 
 _ItemUseBallText08::
 	text_ram wBoxMonNicks
 	text " was"
 	line "transferred to"
 	cont "someone's PC!"
-	autodone
+	prompt
 
 _ItemUseBallText06::
 	text "New #DEX data"
@@ -61,18 +61,18 @@ _SurfingGotOnText::
 	line "@"
 	text_ram wNameBuffer
 	text "!"
-	autodone
+	prompt
 
 _SurfingNoPlaceToGetOffText::
 	text "There's no place"
 	line "to get off!"
-	autodone
+	prompt
 
 _RefusingText::
 	text_ram wNameBuffer
 	text_start
 	line "is refusing!"
-	autodone
+	prompt
 
 _VitaminStatRoseText::
 	text_ram wNameBuffer
@@ -80,12 +80,12 @@ _VitaminStatRoseText::
 	line "@"
 	text_ram wStringBuffer
 	text " rose."
-	autodone
+	prompt
 
 _VitaminNoEffectText::
 	text "It won't have any"
 	line "effect."
-	autodone
+	prompt
 
 _ThrewBaitText::
 	text "<PLAYER> threw"
@@ -103,12 +103,12 @@ _PlayedFluteNoEffectText::
 
 	para "Now, that's a"
 	line "catchy tune!"
-	autodone
+	prompt
 
 _FluteWokeUpText::
 	text "All sleeping"
 	line "#MON woke up."
-	autodone
+	prompt
 
 _PlayedFluteHadEffectText::
 	text "<PLAYER> played the"
@@ -126,7 +126,7 @@ _ItemfinderFoundItemText::
 	text "Yes! ITEMFINDER"
 	line "indicates there's"
 	cont "an item nearby."
-	autodone
+	prompt
 
 _ItemfinderFoundNothingText::
 	text "Nope! ITEMFINDER"
@@ -147,25 +147,25 @@ _PPMaxedOutText::
 	text_ram wStringBuffer
 	text "'s PP"
 	line "is maxed out."
-	autodone
+	prompt
 
 _PPIncreasedText::
 	text_ram wStringBuffer
 	text "'s PP"
 	line "increased."
-	autodone
+	prompt
 
 _PPRestoredText::
 	text "PP was restored."
-	autodone
+	prompt
 
 _BootedUpTMText::
 	text "Booted up a TM!"
-	autodone
+	prompt
 
 _BootedUpHMText::
 	text "Booted up an HM!"
-	autodone
+	prompt
 
 _TeachMachineMoveText::
 	text "It contained"
@@ -191,55 +191,55 @@ _MonCannotLearnMachineMoveText::
 	line "@"
 	text_ram wStringBuffer
 	text "."
-	autodone
+	prompt
 
 _ItemUseNotTimeText::
 	text "OAK: <PLAYER>!"
 	line "This isn't the"
 	cont "time to use that! "
-	autodone
+	prompt
 
 _ItemUseNotYoursToUseText::
 	text "This isn't yours"
 	line "to use!"
-	autodone
+	prompt
 
 _ItemUseNoEffectText::
 	text "It won't have any"
 	line "effect."
-	autodone
+	prompt
 
 _ThrowBallAtTrainerMonText1::
 	text "The trainer"
 	line "blocked the BALL!"
-	autodone
+	prompt
 
 _ThrowBallAtTrainerMonText2::
 	text "Don't be a thief!"
-	autodone
+	prompt
 
 _NoCyclingAllowedHereText::
 	text "No cycling"
 	next "allowed here."
-	autodone
+	prompt
 
 _NoSurfingHereText::
 	text "No SURFing on"
 	line "@"
 	text_ram wNameBuffer
 	text " here!"
-	autodone
+	prompt
 
 _BoxFullCannotThrowBallText::
 	text "The #MON BOX"
 	line "is full! Can't"
 	cont "use that item!"
-	autodone
+	prompt
 
 _DontHavePokemonText::
 	text "You don't have a "
 	line "#MON!"
-	autodone
+	prompt
 
 _ItemUseText001::
 	text "<PLAYER> used@"
@@ -286,7 +286,7 @@ _IsItOKToTossItemText::
 _TooImportantToTossText::
 	text "That's too impor-"
 	line "tant to toss!"
-	autodone
+	prompt
 
 _AlreadyKnowsText::
 	text_ram wNameBuffer
@@ -433,10 +433,10 @@ _AfterTrade3Text::
 _NothingToCutText::
 	text "There isn't"
 	line "anything to CUT!"
-	autodone
+	prompt
 
 _UsedCutText::
 	text_ram wNameBuffer
 	text " hacked"
 	line "away with CUT!"
-	autodone
+	prompt

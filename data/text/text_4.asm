@@ -1,7 +1,7 @@
 _FileDataDestroyedText::
 	text "The file data is"
 	line "destroyed!"
-	autodone
+	prompt
 
 _SavingText::
 	text "Saving..."
