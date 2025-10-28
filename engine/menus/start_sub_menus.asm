@@ -335,10 +335,7 @@ StartMenu_Item::
 	ld [wListMenuID], a
 	ld a, [wBagSavedMenuItem]
 	ld [wCurrentMenuItem], a
-	ld a, 1
-	ld [wTempFlag], a
 	call DisplayListMenuID
-	jp nz, .sortItems
 	ld a, [wCurrentMenuItem]
 	ld [wBagSavedMenuItem], a
 	jr nc, .choseItem
@@ -458,9 +455,6 @@ StartMenu_Item::
 	jp ItemMenuLoop
 .infoItem
 	farcall DisplayItemDescription
-	jp ItemMenuLoop
-.sortItems
-	callfar SortItems
 	jp ItemMenuLoop
 	
 CannotUseItemsHereText:

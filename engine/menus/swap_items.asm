@@ -149,18 +149,25 @@ HandleItemListSwapping::
 	jp DisplayListMenuIDLoop
 
 SortItems::
+	ld a, [wListMenuID]
+	cp ITEMLISTMENU
+	jp nz, DisplayListMenuIDLoop ; only rearrange item list menus
 	push hl
 	push bc
 	ld hl, SortItemsText ; Display the text to ask to sort
 	call PrintText
-	call YesNoChoice
+	hlcoord 14, 7
+	lb bc, 8, 15
+	ld a, TWO_OPTION_MENU
+	ld [wTextBoxID], a
+	call DisplayTextBoxID ; Used for Yes/Nop without affecting Buffer1 or 2
 	ld a, [wCurrentMenuItem]
 	and a
 	jp z, .beginSorting ; If yes
-	jr .done
+	jr .cleanWindow
 .finishedSwapping
 	ld a, [hSwapTemp] ; If not 0, then a swap of items did occur
-	cp 0
+	and a
 	jr z, .nothingSorted
 	ld hl, SortComplete
 	jr .printResultText
@@ -168,18 +175,73 @@ SortItems::
 	ld hl, NothingToSort
 .printResultText
 	call PrintText
+.cleanWindow
+	ld a, LIST_MENU_BOX
+	ld [wTextBoxID], a
+	ld hl, EmptyString
+	ld a, [wIsInBattle]
+	and a
+	jr nz, .done ; In battle
+	ld hl, PokemonSellingGreetingText
+	ld a, [wMiscFlags]
+	bit BIT_TURNING, a  ; Is in Mart?
+	jr nz, .done
+	bit BIT_NO_SPRITE_UPDATES, a  ; Is in PC?
+	jr z, .overworld
+	ld a, [wParentMenuItem]
+	and a
+	ld hl, WhatToWithdrawText
+	jr z, .done
+	ld hl, WhatToDepositText
+	dec a
+	jr z, .done
+	ld hl, WhatToTossText
+	dec a
+	jr z, .done
+	ld hl, EmptyString
+	jr .done
+.overworld
+	call LoadScreenTilesFromBuffer2  ; Reloads the overworld
+	call DisplayTextBoxID ; draw the menu text box
+	call UpdateSprites ; disable sprites behind the text box
+	jr .displayListMenuIDPostSwap
 .done
+	call PrintText
+.displayListMenuIDPostSwap  ; Very similar to the latter-half of displayListMenuID
+							; but without the frame delay at the end.
+	ld a, ITEMLISTMENU
+	ld [wListMenuID], a
+	ld a, 1 ; max menu item ID is 1 if the list has less than 2 entries
+	ld [wMenuWatchMovingOutOfBounds], a
+	ld a, [wListCount]
+	cp 2 ; does the list have less than 2 entries?
+	jr c, .setMenuVariables
+	ld a, 2 ; max menu item ID is 2 if the list has at least 2 entries
+.setMenuVariables
+	ld [wMaxMenuItem], a
+	ld a, 4
+	ld [wTopMenuItemY], a
+	ld a, 5
+	ld [wTopMenuItemX], a
+	ld a, [wMiscFlags]
+	ld b, a
+	ld a, PAD_A | PAD_B | PAD_SELECT | PAD_START
+	ld [wMenuWatchedKeys], a
 	xor a ; Zeroes a
 	pop bc
 	pop hl
-	ret
+	jp DisplayListMenuIDLoop
 .beginSorting
 	xor a
 	ld [hSwapTemp], a ; 1 if something in the bag got sorted
 	ld de, 0
 	ld hl, ItemSortList
 	ld b, [hl] ; This is the first item to check for
-	ld hl, wBagItems
+	ld hl, wListPointer
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	inc hl
 	ld c, 0 ; Relative to wBagItems, this is where we'd like to begin swapping
 .loopCurrItemInBag
 	ld a, [hl] ; Load the value of hl to a (which is an item number) and Increments to the quantity
@@ -196,10 +258,14 @@ SortItems::
 	ld hl, ItemSortList
 	add hl, de
 	ld b, [hl]
-	ld hl, wBagItems ; Resets hl to start at the beginning of the bag
+	ld hl, wListPointer
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	inc hl ; Resets hl to start at the beginning of the bag
 	ld a, b
 	cp -1 ; Check if we got through all of the items, to the last one
-	jr z, .finishedSwapping
+	jp z, .finishedSwapping
 	jr .loopCurrItemInBag
 .hasItem ; c contains where to swap to relative to the start of wBagItems
 		 ; hl contains where the item to swap is absolute.
@@ -207,7 +273,11 @@ SortItems::
 	push de
 	ld d, h
 	ld e, l
-	ld hl, wBagItems
+	ld hl, wListPointer
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	inc hl
 	ld a, b
 	ld b, 0
 	add hl, bc ; hl now holds where we'd like to swap to
@@ -250,6 +320,7 @@ SortComplete::
 
 NothingToSort::
 	text_far _NothingToSort
+EmptyString::
 	db "@"
 
 ItemSortList::
@@ -268,12 +339,6 @@ ItemSortList::
 	db ULTRA_BALL
 	db SAFARI_BALL
 	db MASTER_BALL
-	; Common Items
-	db REPEL
-	db SUPER_REPEL
-	db MAX_REPEL
-	db ESCAPE_ROPE
-	db POKE_DOLL
 	; Health
 	db POTION
 	db SUPER_POTION
@@ -294,6 +359,12 @@ ItemSortList::
 	db PARLYZ_HEAL
 	db FULL_HEAL
 	db POKE_FLUTE
+	; Common Items
+	db REPEL
+	db SUPER_REPEL
+	db MAX_REPEL
+	db ESCAPE_ROPE
+	db POKE_DOLL
 	; PP
 	db ETHER
 	db MAX_ETHER
@@ -310,11 +381,11 @@ ItemSortList::
 	; Permanent Raises
 	db RARE_CANDY
 	db HP_UP
+	db PP_UP
 	db PROTEIN
 	db IRON
 	db CARBOS
 	db CALCIUM
-	db PP_UP
 	; Stones
 	db LEAF_STONE
 	db FIRE_STONE
