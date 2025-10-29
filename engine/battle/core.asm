@@ -5475,6 +5475,7 @@ AdjustDamageForMoveType:
 	and 1 << BIT_STAB_DAMAGE
 	ld b, a
 	ld a, [hl] ; a = damage multiplier
+	ldh [hMultiplier], a
 	and a  ; cp NO_EFFECT
 	jr z, .gotMultiplier
 	cp NOT_VERY_EFFECTIVE
@@ -5490,7 +5491,6 @@ AdjustDamageForMoveType:
 	and $7f
 	sla a
 .gotMultiplier
-	ldh [hMultiplier], a
 	add b
 	ld [wDamageMultipliers], a
 	xor a
