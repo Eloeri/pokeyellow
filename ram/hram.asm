@@ -404,7 +404,7 @@ hFieldMoveMonMenuTopMenuItemX:: db
 
 hPikachuSpriteVRAMOffset:: db
 
-	ds 1
+hSelectHoldTimer:: db
 
 ; 0 if DMG, != 0 if CGB
 hOnCGB:: db

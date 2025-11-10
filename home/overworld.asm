@@ -71,6 +71,18 @@ OverworldLoopLessDelay::
 	ldh a, [hJoyHeld]
 	jr .checkIfStartIsPressed
 .notSimulating
+	ld a, [hJoyHeld]
+	bit 2, a
+	jr z, .resetSelectTimer
+	ld a, [hSelectHoldTimer]
+	cp 15  ; held for ~500ms
+	jr c, .incTimer
+.incTimer
+	inc a
+	ld [hSelectHoldTimer], a
+.resetSelectTimer
+	xor a
+	ld [hSelectHoldTimer], a
 	ldh a, [hJoyPressed]
 .checkIfStartIsPressed
 	bit B_PAD_START, a

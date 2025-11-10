@@ -1,46 +1,35 @@
-ReadJoypad_::
-; Poll joypad input.
-; Unlike the hardware register, button
-; presses are indicated by a set bit.
-	ldh a, [hDisableJoypadPolling]
-	and a
-	ret nz
-
-	ld a, 1 << 5 ; select direction keys
-
-	ldh [rJOYP], a
-	ldh a, [rJOYP]
-	ldh a, [rJOYP]
-	cpl
-	and %1111
-	swap a
-	ld b, a
-
-	ld a, 1 << 4 ; select button keys
-	ldh [rJOYP], a
-REPT 6
-	ldh a, [rJOYP]
-ENDR
-	cpl
-	and %1111
-	or b
-
-	ldh [hJoyInput], a
-
-	ld a, 1 << 4 + 1 << 5 ; deselect keys
-	ldh [rJOYP], a
-	ret
-
 _Joypad::
 ; hJoyReleased: (hJoyLast ^ hJoyInput) & hJoyLast
 ; hJoyPressed:  (hJoyLast ^ hJoyInput) & hJoyInput
 
 	ldh a, [hJoyInput]
-	ld b, a
-	and PAD_BUTTONS | PAD_UP
 	cp PAD_BUTTONS ; soft reset
 	jp z, TrySoftReset
 
+	; --- Turbo A/B ---
+	ld b, a
+	ld a, [wFontLoaded]
+	bit 1, a
+	jr z, .noTurbo
+
+	ld a, [rDIV]
+	bit 4, a
+	jr z, .noTurbo
+
+	ld a, b
+	bit B_PAD_A, a
+	jr z, .checkBTurbo
+	xor PAD_A
+.checkBTurbo:
+	bit B_PAD_B, a
+	jr z, .doneTurbo
+	xor PAD_B
+	jr .doneTurbo
+.noTurbo:
+	ld a, b
+.doneTurbo:
+
+	ld b, a
 	ldh a, [hJoyLast]
 	ld e, a
 	xor b
