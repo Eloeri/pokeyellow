@@ -400,7 +400,9 @@ hClearLetterPrintingDelayFlags:: db
 ; bit 2: text is single spaced
 hUILayoutFlags:: db
 
-hFieldMoveMonMenuTopMenuItemX:: db
+hSelectHoldTimer::
+hFieldMoveMonMenuTopMenuItemX::
+	db
 
 hPikachuSpriteVRAMOffset:: db
 
