@@ -9,7 +9,7 @@ PokemonMansion3FWildMons:
 	db 38, GRIMER
 	db 38, GRIMER
 	db 38, MUK
-	db 41, MUK
+	db 41, MAGMAR
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

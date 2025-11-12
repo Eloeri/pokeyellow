@@ -9,7 +9,7 @@ VictoryRoad3FWildMons:
 	db 42, MACHOKE
 	db 45, MACHOKE
 	db 47, GRAVELER
-	db 47, GRAVELER
+	db 47, JYNX
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

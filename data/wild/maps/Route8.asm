@@ -9,7 +9,7 @@ Route8WildMons:
 	db 19, JIGGLYPUFF
 	db 24, JIGGLYPUFF
 	db 20, KADABRA
-	db 27, KADABRA
+	db 27, MEOWTH
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate
