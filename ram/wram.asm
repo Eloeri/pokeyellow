@@ -1948,6 +1948,23 @@ wPlayerMoney:: ds 3 ; BCD
 
 wRivalName:: ds NAME_LENGTH
 
+; %7654321
+; bit 7 = battle animation
+; 0: On
+; 1: Off
+; bit 6 = battle style
+; 0: Shift
+; 1: Set
+; bits 5-4 = sound
+;    00: Mono
+;    01: Earphone1
+;    10: Earphone2
+;    11: Earphone3
+; bits 3 = unused
+; bits 2-0 = text speed (number of frames to delay after printing a letter)
+; 1: Fast
+; 3: Medium
+; 5: Slow
 wOptions:: db
 
 wObtainedBadges:: flag_array NUM_BADGES
